@@ -1,14 +1,28 @@
 import React from 'react';
-import axios from 'axios'
-import { connect } from "react-redux";
 
 import './App.css';
 import { Route } from 'react-router-dom';
 
 import { Header } from './components';
-import { Home, Card } from './pages';
+import { Home, Cart } from './pages';
 
-import setPizzas from "./redux/actions/pizzas";
+
+
+function App() {
+
+
+
+  return (
+    < div className="App" >
+      <div className="wrapper">
+        <Header />
+        <div className="content">
+          <Route path='/' component={Home} exact />
+          <Route path='/cart' component={Cart} exact />
+        </div>
+      </div>
+    </div >)
+}
 
 
 // function App() {
@@ -34,31 +48,32 @@ import setPizzas from "./redux/actions/pizzas";
 // );
 // }
 
-class App extends React.Component {
-  componentDidMount() {
-    axios.get('http://localhost:3000/db.json')
-      .then(({ data }) => {
-        this.props.setPizzas(data.pizzas);
-      });
-  }
+// class App extends React.Component {
+//   componentDidMount() {
+//     axios.get('http://localhost:3000/db.json')
+//       .then(({ data }) => {
+//         this.props.setPizzas(data.pizzas);
+//       });
+//   }
 
-  render() {
-    console.log(this.props)
-    return (
-      < div className="App" >
-        <div className="wrapper">
-          <Header />
-          <div className="content">
-            <Route path='/' render={() => <Home items={this.props.items} />} exact />
-            <Route path='/card' component={Card} exact />
-          </div>
-        </div>
-      </div >)
+//   render() {
+//     console.log(this.props)
+//     return (
+//       < div className="App" >
+//         <div className="wrapper">
+//           <Header />
+//           <div className="content">
+//             <Route path='/' render={() => <Home items={this.props.items} />} exact />
+//             <Route path='/card' component={Card} exact />
+//           </div>
+//         </div>
+//       </div >)
 
-  }
-}
+//   }
+// }
 
-const mapStateToProps = state => ({ items: state.pizzas.items });
+// const mapStateToProps = state => ({ 
+// items: state.pizzas.items });
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
@@ -66,6 +81,7 @@ const mapStateToProps = state => ({ items: state.pizzas.items });
 //   };
 // }
 
-const mapDispatchToProps = { setPizzas };
+// const mapDispatchToProps = { setPizzas };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
